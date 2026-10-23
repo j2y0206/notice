@@ -6,6 +6,8 @@ const dayNav = document.querySelector('.day-nav');
 const speechStatus = document.querySelector('#speech-status');
 const phraseSearch = document.querySelector('#phrase-search');
 const phraseSearchStatus = document.querySelector('#phrase-search-status');
+const phrasebook = document.querySelector('#phrasebook');
+const navSections = [...tripDays, phrasebook].filter(Boolean);
 
 const localDateKey = () => {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -33,7 +35,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
   navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
 }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
 
-tripDays.forEach((day) => sectionObserver.observe(day));
+navSections.forEach((section) => sectionObserver.observe(section));
 
 navLinks.forEach((link) => {
   link.addEventListener('click', (event) => {

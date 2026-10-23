@@ -14,7 +14,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+html { scroll-behavior: auto; scroll-padding-top: 86px; }
 body {
   margin: 0;
   color: var(--ink);
@@ -55,7 +55,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .button--primary { background: var(--yellow); color: var(--ink); }
 .button--glass { color: white; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); }
 
-.day-nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px max(8px, env(safe-area-inset-left)); background: rgba(245,242,235,.94); box-shadow: 0 4px 20px rgba(20,37,61,.08); backdrop-filter: blur(15px); }
+.day-nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px max(8px, env(safe-area-inset-left)); background: rgba(245,242,235,.94); box-shadow: 0 4px 20px rgba(20,37,61,.08); backdrop-filter: blur(15px); }
 .day-nav a { min-width: 0; padding: 7px 4px; border-radius: 12px; text-align: center; text-decoration: none; }
 .day-nav a.active { color: white; background: var(--navy); }
 .day-nav span { display: block; font-weight: 900; font-size: .92rem; }
