@@ -8,6 +8,10 @@ const phraseSearch = document.querySelector('#phrase-search');
 const phraseSearchStatus = document.querySelector('#phrase-search-status');
 const phrasebook = document.querySelector('#phrasebook');
 const navSections = [...tripDays, phrasebook].filter(Boolean);
+const nowBadge = document.querySelector('#now-badge');
+const nowTitle = document.querySelector('#now-title');
+const nowMeta = document.querySelector('#now-meta');
+const nowLink = document.querySelector('#now-link');
 
 const localDateKey = () => {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -20,12 +24,74 @@ const localDateKey = () => {
 const today = tripDays.find((day) => day.dataset.date === localDateKey());
 if (today) {
   today.classList.add('is-today');
-  todayButton.href = `#${today.id}`;
-  todayButton.textContent = '오늘 일정 바로 보기';
+  todayButton.href = '#now';
+  todayButton.textContent = '지금 일정 보기';
 } else {
   todayButton.href = '#day-1';
   todayButton.textContent = '첫날 일정 보기';
 }
+
+const updateNowCard = () => {
+  if (!nowTitle) return;
+  const currentKey = localDateKey();
+  const firstKey = tripDays[0]?.dataset.date;
+  const lastKey = tripDays.at(-1)?.dataset.date;
+
+  if (currentKey < firstKey) {
+    const todayDate = new Date(`${currentKey}T00:00:00+09:00`);
+    const startDate = new Date(`${firstKey}T00:00:00+09:00`);
+    const days = Math.round((startDate - todayDate) / 86400000);
+    nowBadge.textContent = `D-${days}`;
+    nowTitle.textContent = '여행 준비 체크리스트를 확인하세요';
+    nowMeta.textContent = '2026년 10월 28일 수요일 출발';
+    nowLink.href = '#tools';
+    nowLink.textContent = '준비물 확인 →';
+    return;
+  }
+
+  if (currentKey > lastKey || !today) {
+    nowBadge.textContent = '여행 완료';
+    nowTitle.textContent = '우리 가족 나고야 여행이 끝났습니다';
+    nowMeta.textContent = '메모와 체크리스트는 이 기기에 남아 있습니다';
+    nowLink.href = '#overview';
+    nowLink.textContent = '일정 다시 보기 →';
+    return;
+  }
+
+  const timeParts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+  }).formatToParts(new Date()).map(({ type, value }) => [type, value]));
+  const currentMinutes = Number(timeParts.hour) * 60 + Number(timeParts.minute);
+  const schedules = [...today.querySelectorAll('.event')].map((event, index) => {
+    const match = event.querySelector('time')?.textContent.trim().match(/^(\d{2}):(\d{2})/);
+    if (!match) return null;
+    event.id ||= `${today.id}-schedule-${index + 1}`;
+    return {
+      event,
+      minutes: Number(match[1]) * 60 + Number(match[2]),
+      time: `${match[1]}:${match[2]}`,
+      title: event.querySelector('h3')?.textContent.trim() || '다음 일정'
+    };
+  }).filter(Boolean);
+  const next = schedules.find((schedule) => schedule.minutes >= currentMinutes);
+
+  if (next) {
+    nowBadge.textContent = '다음 일정';
+    nowTitle.textContent = `${next.time} · ${next.title}`;
+    nowMeta.textContent = today.querySelector('.day-number')?.textContent.trim() || '오늘 일정';
+    nowLink.href = `#${next.event.id}`;
+    nowLink.textContent = '바로 이동 →';
+  } else {
+    nowBadge.textContent = '오늘 완료';
+    nowTitle.textContent = '오늘 계획한 일정이 모두 끝났습니다';
+    nowMeta.textContent = '아이들과 편하게 쉬세요';
+    nowLink.href = `#${today.id}`;
+    nowLink.textContent = '오늘 일정 보기 →';
+  }
+};
+
+updateNowCard();
+window.setInterval(updateNowCard, 60000);
 
 const sectionObserver = new IntersectionObserver((entries) => {
   const visible = entries
@@ -106,6 +172,105 @@ if (phraseSearch) {
       ? (matches ? `${matches}개의 표현을 찾았습니다.` : '일치하는 표현이 없습니다.')
       : '';
   });
+}
+
+const readLocalValue = (key, fallback = '') => {
+  try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; }
+};
+const writeLocalValue = (key, value) => {
+  try { localStorage.setItem(key, value); return true; } catch { return false; }
+};
+
+const checklistInputs = [...document.querySelectorAll('[data-check]')];
+const checkProgress = document.querySelector('#check-progress');
+const checkProgressBar = document.querySelector('#check-progress-bar');
+const resetChecklist = document.querySelector('#reset-checklist');
+const savedChecks = (() => {
+  try { return JSON.parse(readLocalValue('nagoya-checklist-v1', '{}')); } catch { return {}; }
+})();
+
+const updateChecklist = () => {
+  const state = Object.fromEntries(checklistInputs.map((input) => [input.dataset.check, input.checked]));
+  writeLocalValue('nagoya-checklist-v1', JSON.stringify(state));
+  const completed = checklistInputs.filter((input) => input.checked).length;
+  if (checkProgress) checkProgress.textContent = `${completed} / ${checklistInputs.length}`;
+  if (checkProgressBar) checkProgressBar.style.width = `${checklistInputs.length ? (completed / checklistInputs.length) * 100 : 0}%`;
+};
+
+checklistInputs.forEach((input) => {
+  input.checked = Boolean(savedChecks[input.dataset.check]);
+  input.addEventListener('change', updateChecklist);
+});
+resetChecklist?.addEventListener('click', () => {
+  checklistInputs.forEach((input) => { input.checked = false; });
+  updateChecklist();
+});
+updateChecklist();
+
+const tripMemo = document.querySelector('#trip-memo');
+const memoStatus = document.querySelector('#memo-status');
+const clearMemo = document.querySelector('#clear-memo');
+let memoStatusTimer;
+if (tripMemo) {
+  tripMemo.value = readLocalValue('nagoya-trip-memo-v1');
+  tripMemo.addEventListener('input', () => {
+    const saved = writeLocalValue('nagoya-trip-memo-v1', tripMemo.value);
+    memoStatus.textContent = saved ? '저장됨' : '저장할 수 없습니다';
+    window.clearTimeout(memoStatusTimer);
+    memoStatusTimer = window.setTimeout(() => { memoStatus.textContent = '이 기기에 자동 저장'; }, 1400);
+  });
+}
+clearMemo?.addEventListener('click', () => {
+  tripMemo.value = '';
+  writeLocalValue('nagoya-trip-memo-v1', '');
+  memoStatus.textContent = '메모를 지웠습니다';
+});
+
+const installButton = document.querySelector('#install-button');
+const installHelp = document.querySelector('#install-help');
+const offlineStatus = document.querySelector('#offline-status');
+let deferredInstallPrompt;
+
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+if (isStandalone && installButton) {
+  installButton.textContent = '홈 화면에서 실행 중';
+  installButton.disabled = true;
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  if (installButton) installButton.textContent = '홈 화면에 설치';
+});
+
+installButton?.addEventListener('click', async () => {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installButton.textContent = '설치 방법 보기';
+    return;
+  }
+  installHelp.hidden = !installHelp.hidden;
+});
+
+window.addEventListener('appinstalled', () => {
+  if (installButton) {
+    installButton.textContent = '설치 완료';
+    installButton.disabled = true;
+  }
+});
+
+if (offlineStatus) {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(() => {
+      offlineStatus.textContent = '✓ 일정과 회화 수첩을 오프라인에서도 열 수 있습니다.';
+    }).catch(() => {
+      offlineStatus.textContent = '브라우저 메뉴에서 홈 화면에 추가해 주세요.';
+    });
+  } else {
+    offlineStatus.textContent = '이 브라우저는 오프라인 저장을 지원하지 않습니다.';
+  }
 }
 
 const showConnectionState = () => {

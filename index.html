@@ -8,7 +8,7 @@
   <title>우리 가족 나고야 여행</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <a class="skip-link" href="#main">일정으로 바로가기</a>
@@ -27,6 +27,7 @@
       <div class="hero__actions">
         <a class="button button--primary" id="today-button" href="#day-1">오늘 일정 보기</a>
         <a class="button button--glass" href="#overview">전체 일정</a>
+        <a class="button button--glass" href="#tools">🧰 현장 도구</a>
         <a class="button button--glass" href="#phrasebook">🗣️ 회화 수첩</a>
       </div>
     </div>
@@ -46,6 +47,10 @@
         <p class="eyebrow">TRIP AT A GLANCE</p>
         <h2 id="overview-title">하루에 하나씩, 무리 없이</h2>
       </div>
+      <article class="now-card" id="now" aria-live="polite">
+        <div><p><span>NOW</span><strong id="now-badge">여행 준비 중</strong></p><h3 id="now-title">일정을 불러오는 중입니다</h3><small id="now-meta">2026년 10월 28일 출발</small></div>
+        <a id="now-link" href="#day-1">일정 보기 →</a>
+      </article>
       <div class="overview-grid">
         <a href="#day-1" class="overview-card coral"><b>수</b><span>도착</span><strong>나고야항 수족관</strong><small>공연 시간에 맞춰 유연하게</small></a>
         <a href="#day-2" class="overview-card blue"><b>목</b><span>하루 일정</span><strong>LEGOLAND</strong><small>11시 전후 입장 목표</small></a>
@@ -248,6 +253,66 @@
       </div>
     </section>
 
+    <section class="field-tools wrap" id="tools" aria-labelledby="tools-title">
+      <div class="section-heading"><p class="eyebrow">FAMILY FIELD TOOLS</p><h2 id="tools-title">현장에서 쓰는 가족 도구</h2></div>
+      <p class="tools-intro">체크 상태와 메모는 이 기기의 브라우저에만 저장됩니다.</p>
+
+      <div class="tools-grid">
+        <article class="tool-card tool-card--wide checklist-tool">
+          <header class="tool-card__header"><div><span>✅</span><div><p>TRIP CHECKLIST</p><h3>가족 체크리스트</h3></div></div><strong id="check-progress">0 / 14</strong></header>
+          <div class="progress-track" aria-hidden="true"><span id="check-progress-bar"></span></div>
+          <div class="checklist-groups">
+            <fieldset><legend>출발 전</legend>
+              <label><input type="checkbox" data-check="passport"><span>여권 4개 · 항공권 확인</span></label>
+              <label><input type="checkbox" data-check="insurance"><span>여행자보험 · 비상연락처 저장</span></label>
+              <label><input type="checkbox" data-check="tickets"><span>레고랜드 · 수족관 입장권 저장</span></label>
+              <label><input type="checkbox" data-check="network"><span>eSIM·로밍 · 충전기 준비</span></label>
+              <label><input type="checkbox" data-check="money"><span>엔화 · Suica 잔액 확인</span></label>
+            </fieldset>
+            <fieldset><legend>매일 외출 전</legend>
+              <label><input type="checkbox" data-check="battery"><span>휴대폰 · 보조배터리</span></label>
+              <label><input type="checkbox" data-check="kids"><span>물티슈 · 여벌옷 · 작은 수건</span></label>
+              <label><input type="checkbox" data-check="tag"><span>아이 이름표 · AirTag 확인</span></label>
+              <label><input type="checkbox" data-check="snack"><span>물 · 아이 간식</span></label>
+              <label><input type="checkbox" data-check="stroller"><span>유모차·트라이크와 우비</span></label>
+            </fieldset>
+            <fieldset><legend>귀국일</legend>
+              <label><input type="checkbox" data-check="final-passport"><span>여권 4개 다시 확인</span></label>
+              <label><input type="checkbox" data-check="lost-found"><span>객실 · 금고 · 충전기 확인</span></label>
+              <label><input type="checkbox" data-check="musky"><span>μSKY 시간과 좌석 확인</span></label>
+              <label><input type="checkbox" data-check="baggage"><span>공항 수하물 무게 확인</span></label>
+            </fieldset>
+          </div>
+          <button class="text-button" id="reset-checklist" type="button">체크 초기화</button>
+        </article>
+
+        <article class="tool-card memo-tool">
+          <header class="tool-card__header"><div><span>📝</span><div><p>LOCAL NOTE</p><h3>현장 메모</h3></div></div></header>
+          <textarea id="trip-memo" rows="8" maxlength="2000" aria-label="현장 메모" placeholder="식당 이름, 살 물건, 바뀐 열차 시간 등을 적어두세요."></textarea>
+          <div class="memo-footer"><small id="memo-status" role="status">이 기기에 자동 저장</small><button class="text-button" id="clear-memo" type="button">메모 지우기</button></div>
+        </article>
+
+        <article class="tool-card install-tool">
+          <header class="tool-card__header"><div><span>📲</span><div><p>OFFLINE READY</p><h3>홈 화면 설치</h3></div></div></header>
+          <p id="offline-status" class="tool-status">오프라인 준비 상태를 확인하고 있습니다.</p>
+          <button class="tool-action" id="install-button" type="button">설치 방법 보기</button>
+          <div class="install-help" id="install-help" hidden><p><b>iPhone·iPad</b><br>Safari의 공유 버튼 → ‘홈 화면에 추가’</p><p><b>Android</b><br>Chrome 메뉴 → ‘홈 화면에 추가’ 또는 ‘앱 설치’</p></div>
+        </article>
+
+        <article class="tool-card tool-card--wide emergency-tool">
+          <header class="tool-card__header"><div><span>🆘</span><div><p>EMERGENCY CARD</p><h3>긴급 도움 카드</h3></div></div></header>
+          <div class="emergency-grid">
+            <a class="emergency-call emergency-call--red" href="tel:110"><span>🚓 경찰</span><strong>110</strong><small>범죄·사고 긴급 신고</small></a>
+            <a class="emergency-call emergency-call--red" href="tel:119"><span>🚑 구급·소방</span><strong>119</strong><small>응급환자·화재</small></a>
+            <a class="emergency-call" href="tel:05038162787"><span>🇰🇷 JNTO 여행자 핫라인</span><strong>050-3816-2787</strong><small>24시간 · 한국어 지원</small></a>
+            <a class="emergency-call" href="tel:0525662111"><span>🏨 JR Gate Tower Hotel</span><strong>052-566-2111</strong><small>프런트 · 15층</small></a>
+          </div>
+          <div class="hotel-card"><div><b lang="ja">名古屋JRゲートタワーホテル</b><p lang="ja">〒450-6660 愛知県名古屋市中村区名駅1-1-3</p><small>나고야 JR 게이트 타워 호텔 · 메이에키 1-1-3</small></div><a href="https://www.google.com/maps/search/?api=1&query=Nagoya+JR+Gate+Tower+Hotel" target="_blank" rel="noopener">지도 열기</a></div>
+          <div class="emergency-sources"><a href="https://www.japan.travel/en/plan/hotline/" target="_blank" rel="noopener">JNTO 공식 긴급 안내</a><a href="https://www.associa.com/ngh/access/" target="_blank" rel="noopener">호텔 공식 정보</a></div>
+        </article>
+      </div>
+    </section>
+
     <section class="quick wrap" id="quick">
       <div class="section-heading"><p class="eyebrow">QUICK REFERENCE</p><h2>현장에서 바로 보는 교통표</h2></div>
       <div class="quick-grid">
@@ -353,6 +418,6 @@
   </footer>
 
   <div class="offline-toast" id="offline-toast" role="status" aria-live="polite">오프라인 상태입니다. 저장된 일정은 계속 볼 수 있어요.</div>
-  <script src="app.js?v=5" defer></script>
+  <script src="app.js?v=6" defer></script>
 </body>
 </html>
