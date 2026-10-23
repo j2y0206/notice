@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nagoya-family-trip-v1';
+const CACHE_NAME = 'nagoya-family-trip-v3';
 const APP_SHELL = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', (event) => {

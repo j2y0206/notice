@@ -2,6 +2,10 @@ const tripDays = [...document.querySelectorAll('.day[data-date]')];
 const navLinks = [...document.querySelectorAll('.day-nav a')];
 const todayButton = document.querySelector('#today-button');
 const offlineToast = document.querySelector('#offline-toast');
+const dayNav = document.querySelector('.day-nav');
+const speechStatus = document.querySelector('#speech-status');
+const phraseSearch = document.querySelector('#phrase-search');
+const phraseSearchStatus = document.querySelector('#phrase-search-status');
 
 const localDateKey = () => {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -30,6 +34,77 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
 
 tripDays.forEach((day) => sectionObserver.observe(day));
+
+navLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    event.preventDefault();
+    const navHeight = dayNav?.getBoundingClientRect().height ?? 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo({ top, behavior: 'auto' });
+    navLinks.forEach((item) => item.classList.toggle('active', item === link));
+    window.requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = previousScrollBehavior;
+    });
+    history.replaceState(null, '', link.getAttribute('href'));
+  });
+});
+
+document.querySelectorAll('.speak-btn').forEach((button) => {
+  button.addEventListener('click', () => {
+    if (!('speechSynthesis' in window)) {
+      speechStatus.textContent = '이 브라우저에서는 음성 재생을 지원하지 않습니다.';
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(button.dataset.speech);
+    utterance.lang = 'ja-JP';
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    document.querySelectorAll('.speak-btn.is-speaking').forEach((item) => item.classList.remove('is-speaking'));
+    button.classList.add('is-speaking');
+    speechStatus.textContent = '일본어 발음을 재생합니다.';
+
+    utterance.onend = () => {
+      button.classList.remove('is-speaking');
+      speechStatus.textContent = '';
+    };
+    utterance.onerror = () => {
+      button.classList.remove('is-speaking');
+      speechStatus.textContent = '음성을 재생하지 못했습니다. 기기의 일본어 음성 설정을 확인해 주세요.';
+    };
+    window.speechSynthesis.speak(utterance);
+  });
+});
+
+if (phraseSearch) {
+  const phraseCards = [...document.querySelectorAll('.phrase-card')];
+  const phraseGroups = [...document.querySelectorAll('.phrase-group')];
+
+  phraseSearch.addEventListener('input', () => {
+    const query = phraseSearch.value.trim().toLocaleLowerCase('ko-KR');
+    let matches = 0;
+
+    phraseCards.forEach((card) => {
+      const isMatch = !query || card.textContent.toLocaleLowerCase('ko-KR').includes(query);
+      card.hidden = !isMatch;
+      if (isMatch && query) matches += 1;
+    });
+
+    phraseGroups.forEach((group) => {
+      group.hidden = query && !group.querySelector('.phrase-card:not([hidden])');
+    });
+
+    phraseSearchStatus.textContent = query
+      ? (matches ? `${matches}개의 표현을 찾았습니다.` : '일치하는 표현이 없습니다.')
+      : '';
+  });
+}
 
 const showConnectionState = () => {
   const isOffline = !navigator.onLine;
