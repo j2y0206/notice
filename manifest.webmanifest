@@ -1,0 +1,13 @@
+{
+  "name": "우리 가족 나고야 여행",
+  "short_name": "나고야 여행",
+  "description": "2026 나고야 3박 4일 가족여행 현장 가이드",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f2eb",
+  "theme_color": "#183153",
+  "lang": "ko",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

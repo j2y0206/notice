@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#183153"/>
+  <circle cx="390" cy="104" r="86" fill="#ef6a5b"/>
+  <path d="M88 306c76-112 150-154 231-130 52 15 83 61 105 135" fill="none" stroke="#ffd85a" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="116" cy="288" r="26" fill="#fff"/>
+  <circle cx="402" cy="330" r="26" fill="#fff"/>
+  <text x="256" y="276" text-anchor="middle" font-family="Arial,sans-serif" font-size="108" font-weight="800" fill="#fff">NGO</text>
+</svg>
