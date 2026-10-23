@@ -17,6 +17,7 @@
 html { scroll-behavior: auto; scroll-padding-top: 86px; }
 body {
   margin: 0;
+  padding-bottom: calc(78px + env(safe-area-inset-bottom));
   color: var(--ink);
   background: var(--paper);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
@@ -60,6 +61,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .day-nav a.active { color: white; background: var(--navy); }
 .day-nav span { display: block; font-weight: 900; font-size: .92rem; }
 .day-nav small { display: block; overflow: hidden; color: inherit; opacity: .72; font-size: .68rem; white-space: nowrap; text-overflow: ellipsis; }
+
+.quick-dock { position: fixed; z-index: 45; left: 50%; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; width: min(calc(100% - 20px), 560px); grid-template-columns: repeat(5, 1fr); padding: 7px; border: 1px solid rgba(255,255,255,.22); border-radius: 20px; background: rgba(24,49,83,.96); box-shadow: 0 12px 34px rgba(20,37,61,.28); backdrop-filter: blur(16px); transform: translateX(-50%); }
+.quick-dock a { display: flex; min-width: 0; min-height: 50px; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-radius: 14px; color: #e7edf4; text-decoration: none; }
+.quick-dock a.active { color: var(--ink); background: var(--yellow); }
+.quick-dock a:focus-visible { outline: 3px solid white; outline-offset: 2px; }
+.quick-dock span { font-size: 1.05rem; line-height: 1.2; }
+.quick-dock small { overflow: hidden; max-width: 100%; font-size: .66rem; font-weight: 850; white-space: nowrap; text-overflow: ellipsis; }
+.quick-dock__emergency { color: #ffd7d2 !important; }
+.quick-dock__emergency.active { color: #8a211b !important; background: #ffd7d2 !important; }
+#overview, #tools, #phrasebook, #emergency-card { scroll-margin-top: 84px; }
 
 .overview { padding-block: 72px; }
 .section-heading h2 { margin: 0; font-size: clamp(2rem, 7vw, 3.6rem); line-height: 1.05; letter-spacing: -.04em; }
@@ -223,7 +234,7 @@ details p { margin: 10px 0 0; }
 .phrase-group--urgent .phrase-card:first-child { border-color: #efb3ab; background: #fff6f4; }
 .phrase-card[hidden], .phrase-group[hidden] { display: none; }
 .speech-status { min-height: 24px; margin: 20px 0 0; color: var(--muted); font-size: .8rem; }
-footer { margin-top: 50px; padding: 28px 0 calc(28px + env(safe-area-inset-bottom)); color: white; background: var(--navy); }
+footer { margin-top: 50px; padding: 28px 0; color: white; background: var(--navy); }
 footer .wrap { display: flex; justify-content: space-between; align-items: center; }
 footer p { margin: 0; font-size: .8rem; }
 footer a { font-size: .8rem; }
@@ -257,6 +268,8 @@ footer a { font-size: .8rem; }
   .hero__actions .button { width: 100%; }
   .day-nav { padding-inline: 4px; }
   .day-nav small { font-size: .61rem; }
+  .quick-dock { bottom: max(6px, env(safe-area-inset-bottom)); width: calc(100% - 12px); padding: 5px; border-radius: 18px; }
+  .quick-dock a { min-height: 48px; border-radius: 13px; }
   .overview-grid { gap: 8px; }
   .overview-card { min-height: 168px; padding: 14px; border-radius: 18px; }
   .overview-card strong { font-size: .94rem; }

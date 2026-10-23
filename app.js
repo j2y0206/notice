@@ -12,6 +12,7 @@ const nowBadge = document.querySelector('#now-badge');
 const nowTitle = document.querySelector('#now-title');
 const nowMeta = document.querySelector('#now-meta');
 const nowLink = document.querySelector('#now-link');
+const dockLinks = [...document.querySelectorAll('.quick-dock a')];
 
 const localDateKey = () => {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -121,6 +122,36 @@ navLinks.forEach((link) => {
   });
 });
 
+const scrollToAnchor = (link) => {
+  const target = document.querySelector(link.getAttribute('href'));
+  if (!target) return;
+  const stickyOffset = target.id.startsWith('day-') ? (dayNav?.getBoundingClientRect().height ?? 0) + 8 : 14;
+  const top = target.id === 'top' ? 0 : target.getBoundingClientRect().top + window.scrollY - stickyOffset;
+  window.scrollTo({ top, behavior: 'smooth' });
+  history.replaceState(null, '', link.getAttribute('href'));
+};
+
+dockLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    scrollToAnchor(link);
+    dockLinks.forEach((item) => item.classList.toggle('active', item === link));
+  });
+});
+
+const dockTargets = ['top', 'overview', ...tripDays.map((day) => day.id), 'tools', 'quick', 'phrasebook', 'emergency-card']
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
+const dockObserver = new IntersectionObserver((entries) => {
+  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (!visible) return;
+  let activeId = visible.target.id;
+  if (activeId.startsWith('day-')) activeId = 'overview';
+  if (activeId === 'quick') activeId = 'tools';
+  dockLinks.forEach((link) => link.classList.toggle('active', link.dataset.dockTarget === activeId));
+}, { rootMargin: '-18% 0px -68% 0px', threshold: [0.01, 0.2] });
+dockTargets.forEach((section) => dockObserver.observe(section));
+
 document.querySelectorAll('.speak-btn').forEach((button) => {
   button.addEventListener('click', () => {
     if (!('speechSynthesis' in window)) {
@@ -131,7 +162,7 @@ document.querySelectorAll('.speak-btn').forEach((button) => {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(button.dataset.speech);
     utterance.lang = 'ja-JP';
-    utterance.rate = 0.82;
+    utterance.rate = 0.92;
     utterance.pitch = 1;
 
     document.querySelectorAll('.speak-btn.is-speaking').forEach((item) => item.classList.remove('is-speaking'));
