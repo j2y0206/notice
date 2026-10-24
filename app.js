@@ -6,14 +6,13 @@ const dayNav = document.querySelector('.day-nav');
 const speechStatus = document.querySelector('#speech-status');
 const phraseSearch = document.querySelector('#phrase-search');
 const phraseSearchStatus = document.querySelector('#phrase-search-status');
-const navSections = ['overview', ...tripDays.map((day) => day.id), 'shopping', 'coupons', 'food', 'tools', 'quick', 'phrasebook', 'emergency-card']
-  .map((id) => document.getElementById(id))
-  .filter(Boolean);
 const nowBadge = document.querySelector('#now-badge');
 const nowTitle = document.querySelector('#now-title');
 const nowMeta = document.querySelector('#now-meta');
 const nowLink = document.querySelector('#now-link');
 const dockLinks = [...document.querySelectorAll('.quick-dock a')];
+const hero = document.querySelector('.hero');
+const primarySections = [...document.querySelectorAll('#main > section')];
 
 const localDateKey = () => {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -95,65 +94,79 @@ const updateNowCard = () => {
 updateNowCard();
 window.setInterval(updateNowCard, 60000);
 
-const sectionObserver = new IntersectionObserver((entries) => {
+const dayObserver = new IntersectionObserver((entries) => {
   const visible = entries
     .filter((entry) => entry.isIntersecting)
     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
   if (!visible) return;
-  const activeDayId = visible.target.id.startsWith('day-') ? visible.target.id : '';
-  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${activeDayId}`));
+  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
 }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
 
-navSections.forEach((section) => sectionObserver.observe(section));
+tripDays.forEach((day) => dayObserver.observe(day));
 
-navLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (!target) return;
-    event.preventDefault();
-    const navHeight = dayNav?.getBoundingClientRect().height ?? 0;
-    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo({ top, behavior: 'auto' });
-    navLinks.forEach((item) => item.classList.toggle('active', item === link));
-    window.requestAnimationFrame(() => {
-      document.documentElement.style.scrollBehavior = previousScrollBehavior;
-    });
-    history.replaceState(null, '', link.getAttribute('href'));
-  });
-});
-
-const scrollToAnchor = (link) => {
-  const target = document.querySelector(link.getAttribute('href'));
-  if (!target) return;
-  const stickyOffset = target.id.startsWith('day-') ? (dayNav?.getBoundingClientRect().height ?? 0) + 8 : 14;
-  const top = target.id === 'top' ? 0 : target.getBoundingClientRect().top + window.scrollY - stickyOffset;
-  window.scrollTo({ top, behavior: 'smooth' });
-  history.replaceState(null, '', link.getAttribute('href'));
+const viewSections = {
+  top: ['overview'],
+  overview: ['overview', ...tripDays.map((day) => day.id)],
+  shopping: ['shopping'],
+  coupons: ['coupons'],
+  food: ['food'],
+  tools: ['tools', 'quick'],
+  phrasebook: ['phrasebook'],
+  'emergency-card': ['tools']
 };
 
-dockLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    scrollToAnchor(link);
-    dockLinks.forEach((item) => item.classList.toggle('active', item === link));
-    navLinks.forEach((item) => item.classList.remove('active'));
+const viewForTarget = (targetId) => {
+  if (!targetId || targetId === 'top' || targetId === 'main') return 'top';
+  if (targetId === 'overview' || targetId === 'now' || targetId.startsWith('day-')) return 'overview';
+  if (targetId === 'emergency-card') return 'emergency-card';
+  const primary = document.getElementById(targetId)?.closest('#main > section');
+  if (!primary) return 'top';
+  return primary.id === 'quick' ? 'tools' : primary.id;
+};
+
+const showView = (view, targetId = view, { historyMode = 'push', smooth = true } = {}) => {
+  const safeView = viewSections[view] ? view : 'top';
+  const visibleIds = new Set(viewSections[safeView]);
+  primarySections.forEach((section) => section.classList.toggle('app-view-hidden', !visibleIds.has(section.id)));
+  hero?.classList.toggle('app-view-hidden', safeView !== 'top');
+  dayNav?.classList.toggle('app-view-hidden', safeView !== 'overview');
+
+  const dockTarget = safeView === 'emergency-card' ? 'emergency-card' : safeView;
+  dockLinks.forEach((link) => link.classList.toggle('active', link.dataset.dockTarget === dockTarget));
+  if (safeView !== 'overview') navLinks.forEach((link) => link.classList.remove('active'));
+
+  window.requestAnimationFrame(() => {
+    const target = document.getElementById(targetId) || document.getElementById(visibleIds.values().next().value);
+    if (!target) return;
+    const stickyOffset = target.id.startsWith('day-') ? (dayNav?.getBoundingClientRect().height ?? 0) + 8 : 14;
+    const top = target.id === 'top' ? 0 : target.getBoundingClientRect().top + window.scrollY - stickyOffset;
+    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+    if (target.id.startsWith('day-')) {
+      navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${target.id}`));
+    }
   });
+
+  const nextHash = `#${targetId || 'top'}`;
+  if (historyMode === 'push' && location.hash !== nextHash) history.pushState({ view: safeView }, '', nextHash);
+  if (historyMode === 'replace') history.replaceState({ view: safeView }, '', nextHash);
+};
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  const targetId = link.getAttribute('href').slice(1) || 'top';
+  if (!document.getElementById(targetId)) return;
+  event.preventDefault();
+  showView(viewForTarget(targetId), targetId);
 });
 
-const dockTargets = ['top', 'overview', ...tripDays.map((day) => day.id), 'shopping', 'coupons', 'food', 'tools', 'quick', 'phrasebook', 'emergency-card']
-  .map((id) => document.getElementById(id))
-  .filter(Boolean);
-const dockObserver = new IntersectionObserver((entries) => {
-  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-  let activeId = visible.target.id;
-  if (activeId.startsWith('day-')) activeId = 'overview';
-  if (activeId === 'quick') activeId = 'tools';
-  dockLinks.forEach((link) => link.classList.toggle('active', link.dataset.dockTarget === activeId));
-}, { rootMargin: '-18% 0px -68% 0px', threshold: [0.01, 0.2] });
-dockTargets.forEach((section) => dockObserver.observe(section));
+window.addEventListener('popstate', () => {
+  const targetId = location.hash.slice(1) || 'top';
+  showView(viewForTarget(targetId), targetId, { historyMode: 'none', smooth: false });
+});
+
+const initialTarget = location.hash.slice(1) || 'top';
+showView(viewForTarget(initialTarget), initialTarget, { historyMode: 'replace', smooth: false });
 
 document.querySelectorAll('.speak-btn').forEach((button) => {
   button.addEventListener('click', () => {
