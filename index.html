@@ -8,7 +8,7 @@
   <title>우리 가족 나고야 여행</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body>
   <a class="skip-link" href="#main">일정으로 바로가기</a>
@@ -28,6 +28,7 @@
         <a class="button button--primary" id="today-button" href="#day-1">오늘 일정 보기</a>
         <a class="button button--glass" href="#overview">전체 일정</a>
         <a class="button button--glass" href="#shopping">🛍️ 쇼핑 가이드</a>
+        <a class="button button--glass" href="#coupons">🎟️ 할인·쿠폰</a>
         <a class="button button--glass" href="#food">🍽️ 가족 맛집</a>
         <a class="button button--glass" href="#tools">🧰 현장 도구</a>
         <a class="button button--glass" href="#phrasebook">🗣️ 회화 수첩</a>
@@ -270,6 +271,7 @@
         <a href="#shop-sakae">⚡ 사카에</a>
         <a href="#shop-noritake">🌳 노리타케</a>
         <a href="#shop-airport">✈️ 공항</a>
+        <a href="#coupons">🎟️ 쿠폰</a>
         <a href="#shop-taxfree">🧾 면세</a>
       </nav>
 
@@ -318,7 +320,7 @@
             <li><strong>GU·Hands</strong><span>옷, 문구, 여행용품이 필요할 때</span></li>
           </ul>
           <div class="shop-tags"><span>우이로</span><span>새우 센베이</span><span>오구라토스트 과자</span><span>문구</span></div>
-          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/search/?api=1&query=JR+Nagoya+Takashimaya" target="_blank" rel="noopener">📍 지도 보기</a><a class="route-btn" href="https://www.jr-tgm.com/shops/detail/235" target="_blank" rel="noopener">지브리 매장</a><a class="route-btn" href="https://www.biccamera.com/bc/i/shop/shoplist/shop120.jsp" target="_blank" rel="noopener">빅카메라 매장</a></div>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/search/?api=1&query=JR+Nagoya+Takashimaya" target="_blank" rel="noopener">📍 지도 보기</a><a class="route-btn" href="https://www.jr-tgm.com/shops/detail/235" target="_blank" rel="noopener">지브리 매장</a><a class="route-btn" href="https://www.biccamera.com/bc/i/shop/shoplist/shop120.jsp" target="_blank" rel="noopener">빅카메라 매장</a><a class="route-btn route-btn--coupon" href="#coupon-bic">🎟️ 역 주변 쿠폰</a></div>
         </article>
 
         <article class="shopping-card shopping-card--accent" id="shop-sakae">
@@ -328,9 +330,10 @@
             <li><strong>Pokémon Center · 동관 2F</strong><span>10:00~20:00 · 혼잡일에는 입장 공지 확인</span></li>
             <li><strong>KIRBY’S PUPUPU MARKET · 동관 3F</strong><span>KIDDY LAND 안 상설 코너 · 면세 대상 외</span></li>
             <li><strong>Standard Products · SKYLE 7F</strong><span>PARCO 쇼핑이 길어지면 생략하는 선택 코스</span></li>
+            <li><strong>Don Quijote 사카에 산초메점 · 선택</strong><span>야바초역에서 약 2분. 시간이 남고 생활용품을 한 번에 살 때만 20~30분</span></li>
           </ul>
           <div class="shop-rule"><b>가족 쇼핑 규칙</b><span>아이마다 ‘큰 것 1개 또는 작은 것 2개’처럼 기준을 먼저 정하기</span></div>
-          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Nagoya+PARCO&destination=SKYLE+Nagoya&travelmode=walking" target="_blank" rel="noopener">🚶 쇼핑 동선</a><a class="route-btn" href="https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/" target="_blank" rel="noopener">포켓몬 공식</a><a class="route-btn" href="https://nagoya.parco.jp/shop/detail/?cd=029343" target="_blank" rel="noopener">커비 공식</a></div>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Nagoya+PARCO&destination=SKYLE+Nagoya&travelmode=walking" target="_blank" rel="noopener">🚶 쇼핑 동선</a><a class="route-btn" href="https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/" target="_blank" rel="noopener">포켓몬 공식</a><a class="route-btn" href="https://nagoya.parco.jp/shop/detail/?cd=029343" target="_blank" rel="noopener">커비 공식</a><a class="route-btn route-btn--coupon" href="#coupon-donki">🎟️ 돈키 쿠폰</a></div>
         </article>
 
         <article class="shopping-card" id="shop-noritake">
@@ -342,7 +345,7 @@
             <li><strong>식사와 쇼핑 함께</strong><span>점심을 따로 이동하지 않아 귀국 동선이 단순함</span></li>
           </ul>
           <div class="shop-tags"><span>식기</span><span>간식</span><span>생활용품</span><span>아이용품</span></div>
-          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Noritake+Garden&destination=AEON+MALL+Nagoya+Noritake+Garden&travelmode=walking" target="_blank" rel="noopener">🚶 두 장소 동선</a><a class="route-btn" href="https://nagoya-noritake-garden.aeonmall.jp/shop" target="_blank" rel="noopener">AEON 매장 찾기</a></div>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Noritake+Garden&destination=AEON+MALL+Nagoya+Noritake+Garden&travelmode=walking" target="_blank" rel="noopener">🚶 두 장소 동선</a><a class="route-btn" href="https://nagoya-noritake-garden.aeonmall.jp/shop" target="_blank" rel="noopener">AEON 매장 찾기</a><a class="route-btn route-btn--coupon" href="#coupon-aeon">🎟️ 면세 확인</a></div>
         </article>
 
         <article class="shopping-card" id="shop-airport">
@@ -418,6 +421,55 @@
         <ol><li><b>다카시마야</b><span>본관·Gate Tower Mall 일부 매장은 당일 합산 가능. 11F 면세 카운터는 19:30까지.</span></li><li><b>기준</b><span>일반 상품은 세전 ¥5,000 이상. 매장별 제외 품목과 수수료 확인.</span></li><li><b>준비물</b><span>여권 원본, 구입 상품, 영수증, 결제한 카드. 자동출입국 이용 시 입국 기록 조건 확인.</span></li></ol>
         <a href="https://www.jr-takashimaya.co.jp/_en/tax_exemption/" target="_blank" rel="noopener">다카시마야 공식 면세 안내 →</a>
       </aside>
+    </section>
+
+    <section class="coupon-guide wrap" id="coupons" aria-labelledby="coupon-title">
+      <div class="section-heading"><p class="eyebrow">COUPON &amp; TAX-FREE</p><h2 id="coupon-title">결제 전에 여는 할인·쿠폰</h2></div>
+      <p class="coupon-guide__intro">쿠폰은 계산이 끝난 뒤 적용하기 어렵다. 결제할 매장을 정하면 아래 카드를 먼저 열고, 여권 원본과 해당 실물카드를 직원에게 함께 보여준다.</p>
+
+      <aside class="coupon-alert"><strong>2026년 10월 24일 공식 조건 확인 · 여행 10월 28~31일</strong><span>쿠폰과 제외 품목은 바뀔 수 있으니 출발 전날 공식 화면을 다시 확인하세요. 할인율은 순서대로 적용되므로 단순 합산과 실제 결제액이 다릅니다.</span></aside>
+
+      <div class="coupon-prep" aria-label="쿠폰 사용 준비물"><span>🛂 여권 원본</span><span>💳 본인 명의 실물카드</span><span>📱 결제 전 실시간 쿠폰 화면</span><span>🧾 당일 영수증</span></div>
+
+      <div class="coupon-grid">
+        <article class="coupon-card coupon-card--featured" id="coupon-bic">
+          <header><span>📷</span><div><p>호텔 직결 · 9~10F</p><h3>빅카메라 × 현대카드</h3></div><b>추가 5%</b></header>
+          <p class="coupon-card__summary">면세 → 빅카메라 품목별 할인 → 현대카드 5%가 차례로 적용되는 이번 여행의 우선 쿠폰.</p>
+          <dl class="coupon-facts"><div><dt>기간</dt><dd>2026. 6. 13 ~ 12. 31</dd></div><div><dt>대상점</dt><dd>나고야 JR 게이트타워점·나고야에키니시점</dd></div><div><dt>카드</dt><dd>국내외겸용 현대카드 · 법인·체크·가족·앱카드 제외</dd></div><div><dt>순서</dt><dd>10% 면세(일부 8%) → 품목별 3·5·7% → 추가 5%</dd></div></dl>
+          <p class="coupon-note">Apple, 게임기·게임 소프트, 일부 주류·파나소닉, DJI, 수입시계, 아울렛·중고·정찰제 상품 등은 제외될 수 있다. 면세 카운터에서 결제 전에 공식 페이지의 인증 화면을 보여준다.</p>
+          <div class="event__actions"><a class="route-btn route-btn--primary route-btn--explained" href="https://www.hyundaicard.com/m/HCSP/M_bicCamera_event.html" target="_blank" rel="noopener"><span>🎟️</span><span><strong>현대카드 쿠폰 열기</strong><small>현장에서 인증 코드 입력</small></span></a><a class="route-btn route-btn--explained" href="https://www.biccamera.com/bc/c/super/okaimono/oshiharai/taxfree/index.jsp" target="_blank" rel="noopener"><span>🧾</span><span><strong>빅카메라 면세 조건</strong><small>금액·제외 품목 확인</small></span></a></div>
+        </article>
+
+        <article class="coupon-card" id="coupon-donki">
+          <header><span>🐧</span><div><p>10/30 · 야바초 근처 선택 코스</p><h3>돈키호테 사카에 산초메점</h3></div><b>하나만 선택</b></header>
+          <p class="coupon-card__summary">두 쿠폰은 중복되지 않는다. ¥30,000 이상이면 제휴 쿠폰의 최대 7%, 간단히 쓰려면 비자 공식 5%를 비교한다.</p>
+          <div class="coupon-options"><div><strong>LIVE JAPAN 제휴 쿠폰</strong><span>세전 ¥10,000 이상 최대 5% · ¥30,000 이상 최대 7% + 면세. 캡처가 아닌 실시간 바코드 필요.</span></div><div><strong>Visa 공식 쿠폰</strong><span>세전 ¥10,000 이상 면세 구매에 추가 5%. 쿠폰 제시 후 Visa로 결제.</span></div></div>
+          <p class="coupon-note">주류·담배·POSA 카드·게임기·세전 ¥100,000 초과 상품·가격 제한 품목 등은 추가 할인 제외. 계산 전에 선택한 쿠폰을 먼저 보여준다.</p>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://livejapan.com/public/operation/coupon/donki/en.html?sc_lid=lj_article_a0006069_en_btn" target="_blank" rel="noopener">최대 7% 쿠폰</a><a class="route-btn" href="https://www.visa.co.jp/pay-with-visa/donquijote-discounts-and-offers.html" target="_blank" rel="noopener">Visa 5% 쿠폰</a><a class="route-btn" href="https://www.google.com/maps/search/?api=1&query=Don+Quijote+Sakae+Sanchome+Nagoya" target="_blank" rel="noopener">📍 매장 지도</a><a class="route-btn" href="https://www.donki.com/en/tax_free/?mv=top_main" target="_blank" rel="noopener">공식 면세 안내</a></div>
+        </article>
+
+        <article class="coupon-card" id="coupon-takashimaya">
+          <header><span>🏬</span><div><p>호텔 바로 아래 · 마지막 날도 가능</p><h3>JR 나고야 다카시마야</h3></div><b>5% 쿠폰</b></header>
+          <p class="coupon-card__summary">외국인 고객용 5% 쇼핑 쿠폰이 있다. 대상 상품을 결제하기 전에 쿠폰 화면을 제시한다.</p>
+          <dl class="coupon-facts"><div><dt>면세</dt><dd>세전 ¥5,000 이상 · 일부 Gate Tower Mall 매장과 당일 합산 가능</dd></div><div><dt>장소</dt><dd>11F 면세 카운터 · 접수 10:00~19:30</dd></div><div><dt>수수료</dt><dd>면세 대상 금액의 1.55%가 부과되어 실질 환급액은 세율보다 적음</dd></div></dl>
+          <p class="coupon-note">브랜드·상품별 쿠폰 및 면세 제외가 있다. 여권, 상품, 영수증, 결제 카드를 지참하고 카드 명의와 여권 영문명이 같아야 한다.</p>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.jr-takashimaya.co.jp/cp/foreign/" target="_blank" rel="noopener">🎟️ 5% 쿠폰 열기</a><a class="route-btn" href="https://www.jr-takashimaya.co.jp/_en/tax_exemption/" target="_blank" rel="noopener">공식 면세 안내</a></div>
+        </article>
+
+        <article class="coupon-card" id="coupon-aeon">
+          <header><span>🛒</span><div><p>10/31 · 노리타케</p><h3>AEON MALL</h3></div><b class="coupon-status--neutral">매장별 확인</b></header>
+          <p class="coupon-card__summary">나고야 노리타케점에서 확인되는 관광객용 몰 전체 공통 할인쿠폰은 없다. TAX FREE 표시가 있는 입점 매장에서 각각 처리한다.</p>
+          <dl class="coupon-facts"><div><dt>기준</dt><dd>일반 상품 세전 ¥5,000 이상 · 소모품 ¥5,000~¥500,000</dd></div><div><dt>주의</dt><dd>서로 다른 입점 매장 영수증은 합산된다고 가정하지 말고 매장에 확인</dd></div><div><dt>준비</dt><dd>여권 원본·구매품·영수증·여권과 같은 명의의 결제 카드</dd></div></dl>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://en.aeonmall.global/taxfree" target="_blank" rel="noopener">🧾 AEON 면세 조건</a><a class="route-btn" href="https://nagoya-noritake-garden.aeonmall.jp/shop" target="_blank" rel="noopener">입점 매장 확인</a></div>
+        </article>
+
+        <article class="coupon-card coupon-card--wide" id="coupon-airport">
+          <header><span>✈️</span><div><p>10/31 · 센트레아 T1 출국심사 후</p><h3>공항 면세점 사전예약</h3></div><b class="coupon-status--neutral">예약 혜택</b></header>
+          <p class="coupon-card__summary">추가 할인쿠폰보다 재고 확보와 시간 절약에 의미가 있다. 고구마소주처럼 꼭 살 품목은 예약 재고를 먼저 확인한다.</p>
+          <dl class="coupon-facts"><div><dt>예약</dt><dd>출발 14일 전부터 전날 15:00까지</dd></div><div><dt>수령</dt><dd>T1 출국심사 후 예약품 수령 카운터에서 결제·수령</dd></div><div><dt>당일</dt><dd>유카리 등 일반 매장 상품은 보안검색 전에 별도 구매</dd></div></dl>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://duty-free.centrair.jp/" target="_blank" rel="noopener">🛒 면세품 사전예약</a><a class="route-btn" href="https://www.centrair.jp/shop-dine/dfs/index.html" target="_blank" rel="noopener">공항 면세점 안내</a></div>
+        </article>
+      </div>
     </section>
 
     <section class="food-guide wrap" id="food" aria-labelledby="food-title">
@@ -670,13 +722,14 @@
     <a href="#top" data-dock-target="top"><span aria-hidden="true">⌂</span><small>홈</small></a>
     <a href="#overview" data-dock-target="overview"><span aria-hidden="true">🗓️</span><small>일정</small></a>
     <a href="#shopping" data-dock-target="shopping"><span aria-hidden="true">🛍️</span><small>쇼핑</small></a>
+    <a href="#coupons" data-dock-target="coupons"><span aria-hidden="true">🎟️</span><small>쿠폰</small></a>
     <a href="#food" data-dock-target="food"><span aria-hidden="true">🍽️</span><small>맛집</small></a>
-    <a href="#tools" data-dock-target="tools"><span aria-hidden="true">🧰</span><small>현장도구</small></a>
+    <a href="#tools" data-dock-target="tools"><span aria-hidden="true">🧰</span><small>도구</small></a>
     <a href="#phrasebook" data-dock-target="phrasebook"><span aria-hidden="true">🗣️</span><small>회화</small></a>
     <a href="#emergency-card" data-dock-target="emergency-card" class="quick-dock__emergency"><span aria-hidden="true">🆘</span><small>긴급</small></a>
   </nav>
 
   <div class="offline-toast" id="offline-toast" role="status" aria-live="polite">오프라인 상태입니다. 저장된 일정은 계속 볼 수 있어요.</div>
-  <script src="app.js?v=19" defer></script>
+  <script src="app.js?v=20" defer></script>
 </body>
 </html>
