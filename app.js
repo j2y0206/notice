@@ -94,15 +94,26 @@ const updateNowCard = () => {
 updateNowCard();
 window.setInterval(updateNowCard, 60000);
 
-const dayObserver = new IntersectionObserver((entries) => {
-  const visible = entries
-    .filter((entry) => entry.isIntersecting)
-    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
-}, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
+let dayScrollFrame = 0;
+const updateActiveDay = () => {
+  dayScrollFrame = 0;
+  if (dayNav?.classList.contains('app-view-hidden')) return;
+  const navBottom = dayNav?.getBoundingClientRect().bottom ?? 0;
+  const probe = Math.max(navBottom + 24, window.innerHeight * 0.28);
+  let activeDay = null;
+  tripDays.forEach((day) => {
+    if (day.getBoundingClientRect().top <= probe) activeDay = day;
+  });
+  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${activeDay?.id ?? ''}`));
+};
 
-tripDays.forEach((day) => dayObserver.observe(day));
+const scheduleDayUpdate = () => {
+  if (dayScrollFrame) return;
+  dayScrollFrame = window.requestAnimationFrame(updateActiveDay);
+};
+
+window.addEventListener('scroll', scheduleDayUpdate, { passive: true });
+window.addEventListener('resize', scheduleDayUpdate);
 
 const viewSections = {
   top: ['overview'],
@@ -144,6 +155,7 @@ const showView = (view, targetId = view, { historyMode = 'push', smooth = true }
     if (target.id.startsWith('day-')) {
       navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${target.id}`));
     }
+    scheduleDayUpdate();
   });
 
   const nextHash = `#${targetId || 'top'}`;
