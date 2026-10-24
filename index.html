@@ -8,7 +8,7 @@
   <title>우리 가족 나고야 여행</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
   <a class="skip-link" href="#main">일정으로 바로가기</a>
@@ -258,7 +258,7 @@
       <p class="shopping-guide__intro">매장을 따로 찾아다니기보다 이미 가는 장소에서 산다. 아이들 물건은 사카에, 식품·생활용품은 나고야역과 노리타케, 빠뜨린 선물만 공항에서 보충하는 흐름이다.</p>
 
       <nav class="shopping-nav" aria-label="쇼핑 지역 바로가기">
-        <a href="#shop-onsite">🎟️ 현장 쇼핑</a>
+        <a href="#shop-onsite">📷 일정별 쇼핑</a>
         <a href="#shop-station">🚉 나고야역</a>
         <a href="#shop-sakae">⚡ 사카에</a>
         <a href="#shop-noritake">🌳 노리타케</a>
@@ -266,18 +266,8 @@
         <a href="#shop-taxfree">🧾 면세</a>
       </nav>
 
-      <section class="shop-photo-guide" aria-labelledby="shop-photo-title">
-        <div class="shop-photo-guide__heading"><div><p>FIND IT BY PHOTO</p><h3 id="shop-photo-title">사진으로 미리 찾기</h3></div><span>사진을 누르면 지도 열기</span></div>
-        <div class="shop-photo-row">
-          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Donguri+Republic+Nagoya+Takashimaya+Gate+Tower+Mall" target="_blank" rel="noopener"><img src="assets/shopping/donguri.jpg" alt="도토리공화국 나고야점의 대형 네코버스 조형물과 매장 내부" loading="lazy"><span><b>도토리공화국</b><small>Gate Tower Mall 1F · 큰 네코버스</small></span></a><figcaption><a href="https://x.com/ghibli_dongurep/status/891918751326654464" target="_blank" rel="noopener">사진 출처: 공식 계정</a></figcaption></figure>
-          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Bic+Camera+Nagoya+JR+Gate+Tower" target="_blank" rel="noopener"><img src="assets/shopping/bic-camera.jpg" alt="빅카메라 로고가 붙어 있는 나고야 JR 게이트 타워 건물 외관" loading="lazy"><span><b>빅카메라</b><small>JR Gate Tower 9~10F · 건물 외벽 로고</small></span></a><figcaption><a href="https://www.nagoya-info.jp/en/souvenir/detail/80/" target="_blank" rel="noopener">사진 출처: Visit Nagoya</a></figcaption></figure>
-          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Pokemon+Center+Nagoya" target="_blank" rel="noopener"><img src="assets/shopping/pokemon-center.webp" alt="포켓몬센터 나고야 입구와 피카츄, 세레비 조형물" loading="lazy"><span><b>포켓몬센터 나고야</b><small>PARCO 동관 2F · 검은 입구와 큰 나무</small></span></a><figcaption><a href="https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/" target="_blank" rel="noopener">사진 출처: 포켓몬 공식</a></figcaption></figure>
-          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Noritake+Garden+Nagoya" target="_blank" rel="noopener"><img src="assets/shopping/noritake-garden.jpg" alt="노리타케의 숲 붉은 벽돌 건물과 가족 방문객" loading="lazy"><span><b>노리타케의 숲</b><small>붉은 벽돌 건물 · AEON 바로 옆</small></span></a><figcaption><a href="https://www.noritake.co.jp/eng/mori/" target="_blank" rel="noopener">사진 출처: 노리타케 공식</a></figcaption></figure>
-        </div>
-      </section>
-
       <section class="onsite-shopping" id="shop-onsite" aria-labelledby="onsite-shopping-title">
-        <div class="onsite-shopping__heading"><div><p>SHOP ALONG THE WAY</p><h3 id="onsite-shopping-title">일정별 현장 쇼핑</h3></div><span>사진을 누르면 공식 매장 안내</span></div>
+        <div class="onsite-shopping__heading"><div><p>SHOP ALONG THE WAY</p><h3 id="onsite-shopping-title">사진으로 보는 일정별 쇼핑</h3></div><span>사진을 누르면 공식 매장 안내</span></div>
         <p class="onsite-shopping__intro">따로 쇼핑하러 이동하지 않고, 관람을 마치는 지점에서 20~30분만 본다. 큰 인형과 세트는 부피를 먼저 확인하고 아이마다 고르는 개수를 정해두면 편하다.</p>
         <div class="onsite-shopping-grid">
           <article class="onsite-shop-card onsite-shop-card--hotel">
@@ -295,6 +285,14 @@
           <article class="onsite-shop-card">
             <a class="onsite-shop-card__photo" href="https://museum.jr-central.co.jp/event/" target="_blank" rel="noopener"><img src="assets/shopping/railway-stickers.jpg" alt="리니어 철도관 전시 차량 디자인의 공식 스티커 세 종류" loading="lazy"><span>공식 매장 안내 ↗</span></a>
             <div class="onsite-shop-card__body"><p>🚄 10/30 금요일</p><h4>리니어·철도관</h4><strong>전시 차량 스티커 · 키링 · 철도 문구 · 기차 도시락</strong><ul><li>스티커·문구는 작고 나고야에서만 사기 좋은 기념품</li><li>닥터옐로·N700S 도시락은 용기를 가져올 때만 선택</li></ul><div class="shop-timing"><b>추천 시점</b><span>12:35 전후 · 점심과 퇴장 전에 한 번에</span></div></div>
+          </article>
+          <article class="onsite-shop-card">
+            <a class="onsite-shop-card__photo" href="https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/" target="_blank" rel="noopener"><img src="assets/shopping/pokemon-center.webp" alt="포켓몬센터 나고야 입구와 피카츄, 세레비 조형물" loading="lazy"><span>공식 매장 안내 ↗</span></a>
+            <div class="onsite-shop-card__body"><p>⚡ 10/30 금요일 오후</p><h4>사카에·PARCO</h4><strong>포켓몬 · 커비 캐릭터 굿즈</strong><ul><li>포켓몬센터는 PARCO 동관 2층부터 시작</li><li>구매 개수를 먼저 정하고 커비 매장은 시간 되면 방문</li></ul><div class="shop-timing"><b>추천 시점</b><span>16:00~17:10 · 같은 건물에서 한 번에</span></div></div>
+          </article>
+          <article class="onsite-shop-card">
+            <a class="onsite-shop-card__photo" href="https://www.noritake.co.jp/eng/mori/" target="_blank" rel="noopener"><img src="assets/shopping/noritake-garden.jpg" alt="노리타케의 숲 붉은 벽돌 건물과 가족 방문객" loading="lazy"><span>공식 시설 안내 ↗</span></a>
+            <div class="onsite-shop-card__body"><p>🌳 10/31 토요일</p><h4>노리타케·AEON</h4><strong>식기 · 생활용품 · 식품 · 아이용품</strong><ul><li>노리타케 식기는 포장과 수하물 무게부터 확인</li><li>AEON에서 점심과 마지막 실용 쇼핑을 함께 해결</li></ul><div class="shop-timing"><b>추천 시점</b><span>11:10~13:10 · 출발 알람 필수</span></div></div>
           </article>
         </div>
         <p class="onsite-shopping__note">상품·가격·운영 여부는 바뀌거나 품절될 수 있으므로 현장 표시를 우선하세요.</p>
@@ -570,6 +568,6 @@
   </nav>
 
   <div class="offline-toast" id="offline-toast" role="status" aria-live="polite">오프라인 상태입니다. 저장된 일정은 계속 볼 수 있어요.</div>
-  <script src="app.js?v=12" defer></script>
+  <script src="app.js?v=13" defer></script>
 </body>
 </html>
