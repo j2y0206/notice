@@ -6,7 +6,9 @@ const dayNav = document.querySelector('.day-nav');
 const speechStatus = document.querySelector('#speech-status');
 const phraseSearch = document.querySelector('#phrase-search');
 const phraseSearchStatus = document.querySelector('#phrase-search-status');
-const navSections = tripDays;
+const navSections = ['overview', ...tripDays.map((day) => day.id), 'shopping', 'tools', 'quick', 'phrasebook', 'emergency-card']
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
 const nowBadge = document.querySelector('#now-badge');
 const nowTitle = document.querySelector('#now-title');
 const nowMeta = document.querySelector('#now-meta');
@@ -98,7 +100,8 @@ const sectionObserver = new IntersectionObserver((entries) => {
     .filter((entry) => entry.isIntersecting)
     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
   if (!visible) return;
-  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
+  const activeDayId = visible.target.id.startsWith('day-') ? visible.target.id : '';
+  navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${activeDayId}`));
 }, { rootMargin: '-25% 0px -60% 0px', threshold: [0.05, 0.2, 0.5] });
 
 navSections.forEach((section) => sectionObserver.observe(section));
@@ -135,6 +138,7 @@ dockLinks.forEach((link) => {
     event.preventDefault();
     scrollToAnchor(link);
     dockLinks.forEach((item) => item.classList.toggle('active', item === link));
+    navLinks.forEach((item) => item.classList.remove('active'));
   });
 });
 
