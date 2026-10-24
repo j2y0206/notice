@@ -8,7 +8,7 @@
   <title>우리 가족 나고야 여행</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
   <a class="skip-link" href="#main">일정으로 바로가기</a>
@@ -265,6 +265,16 @@
         <a href="#shop-taxfree">🧾 면세</a>
       </nav>
 
+      <section class="shop-photo-guide" aria-labelledby="shop-photo-title">
+        <div class="shop-photo-guide__heading"><div><p>FIND IT BY PHOTO</p><h3 id="shop-photo-title">사진으로 미리 찾기</h3></div><span>사진을 누르면 지도 열기</span></div>
+        <div class="shop-photo-row">
+          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Donguri+Republic+Nagoya+Takashimaya+Gate+Tower+Mall" target="_blank" rel="noopener"><img src="assets/shopping/donguri.jpg" alt="도토리공화국 나고야점의 대형 네코버스 조형물과 매장 내부" loading="lazy"><span><b>도토리공화국</b><small>Gate Tower Mall 1F · 큰 네코버스</small></span></a><figcaption><a href="https://x.com/ghibli_dongurep/status/891918751326654464" target="_blank" rel="noopener">사진 출처: 공식 계정</a></figcaption></figure>
+          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Bic+Camera+Nagoya+JR+Gate+Tower" target="_blank" rel="noopener"><img src="assets/shopping/bic-camera.jpg" alt="빅카메라 로고가 붙어 있는 나고야 JR 게이트 타워 건물 외관" loading="lazy"><span><b>빅카메라</b><small>JR Gate Tower 9~10F · 건물 외벽 로고</small></span></a><figcaption><a href="https://www.nagoya-info.jp/en/souvenir/detail/80/" target="_blank" rel="noopener">사진 출처: Visit Nagoya</a></figcaption></figure>
+          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Pokemon+Center+Nagoya" target="_blank" rel="noopener"><img src="assets/shopping/pokemon-center.webp" alt="포켓몬센터 나고야 입구와 피카츄, 세레비 조형물" loading="lazy"><span><b>포켓몬센터 나고야</b><small>PARCO 동관 2F · 검은 입구와 큰 나무</small></span></a><figcaption><a href="https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/" target="_blank" rel="noopener">사진 출처: 포켓몬 공식</a></figcaption></figure>
+          <figure class="shop-photo-card"><a href="https://www.google.com/maps/search/?api=1&query=Noritake+Garden+Nagoya" target="_blank" rel="noopener"><img src="assets/shopping/noritake-garden.jpg" alt="노리타케의 숲 붉은 벽돌 건물과 가족 방문객" loading="lazy"><span><b>노리타케의 숲</b><small>붉은 벽돌 건물 · AEON 바로 옆</small></span></a><figcaption><a href="https://www.noritake.co.jp/eng/mori/" target="_blank" rel="noopener">사진 출처: 노리타케 공식</a></figcaption></figure>
+        </div>
+      </section>
+
       <div class="shopping-grid">
         <article class="shopping-card" id="shop-station">
           <header><span>🚉</span><div><p>호텔과 바로 연결</p><h3>나고야역</h3></div><b>저녁·예비 시간</b></header>
@@ -300,7 +310,7 @@
             <li><strong>식사와 쇼핑 함께</strong><span>점심을 따로 이동하지 않아 귀국 동선이 단순함</span></li>
           </ul>
           <div class="shop-tags"><span>식기</span><span>간식</span><span>생활용품</span><span>아이용품</span></div>
-          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Noritake+Garden&destination=AEON+MALL+Nagoya+Noritake+Garden&travelmode=walking" target="_blank" rel="noopener">🚶 두 장소 동선</a><a class="route-btn" href="https://nagoyanoritaake.aeonmall.com/shop/lists/" target="_blank" rel="noopener">AEON 매장 찾기</a></div>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/dir/?api=1&origin=Noritake+Garden&destination=AEON+MALL+Nagoya+Noritake+Garden&travelmode=walking" target="_blank" rel="noopener">🚶 두 장소 동선</a><a class="route-btn" href="https://nagoya-noritake-garden.aeonmall.jp/shop" target="_blank" rel="noopener">AEON 매장 찾기</a></div>
         </article>
 
         <article class="shopping-card" id="shop-airport">
@@ -529,6 +539,6 @@
   </nav>
 
   <div class="offline-toast" id="offline-toast" role="status" aria-live="polite">오프라인 상태입니다. 저장된 일정은 계속 볼 수 있어요.</div>
-  <script src="app.js?v=10" defer></script>
+  <script src="app.js?v=11" defer></script>
 </body>
 </html>
