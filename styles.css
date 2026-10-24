@@ -173,6 +173,21 @@ details p { margin: 10px 0 0; }
 .food-rule span { color: #d8e1eb; font-size: .76rem; line-height: 1.55; }
 .food-card { scroll-margin-top: 132px; }
 .food-card--accent { border-color: rgba(239,106,91,.38); }
+.airport-zone-grid, .airport-food-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.airport-zone-grid > section, .airport-food-groups > section { min-width: 0; padding: 15px; border-radius: 16px; background: #f4f6f8; }
+.airport-zone-grid h4, .airport-food-groups h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 11px; font-size: .84rem; }
+.airport-zone-grid h4 span { display: grid; width: 25px; height: 25px; place-items: center; border-radius: 50%; color: white; background: var(--blue); font-size: .7rem; }
+.airport-zone--secure { background: #eef5fb !important; }
+.airport-zone--secure h4 span { background: var(--green); }
+.airport-zone-grid ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.airport-zone-grid li strong, .airport-zone-grid li span { display: block; }
+.airport-zone-grid li strong { font-size: .78rem; }
+.airport-zone-grid li span { margin-top: 2px; color: var(--muted); font-size: .7rem; line-height: 1.45; }
+.airport-order { display: grid; gap: 3px; margin-top: 13px; padding: 12px 14px; border-radius: 13px; background: #fff6d8; }
+.airport-order strong { font-size: .76rem; }
+.airport-order span { color: var(--muted); font-size: .72rem; line-height: 1.5; }
+.airport-food-groups .shopping-list { gap: 8px; }
+#shop-airport, #food-airport { grid-column: 1 / -1; }
 .shopping-nav { position: sticky; top: 63px; z-index: 12; display: flex; gap: 8px; margin: 24px 0 28px; padding: 8px; overflow-x: auto; border: 1px solid #e1e5ea; border-radius: 16px; background: rgba(245,242,235,.95); box-shadow: 0 8px 24px rgba(20,37,61,.08); backdrop-filter: blur(14px); scrollbar-width: none; }
 .shopping-nav::-webkit-scrollbar { display: none; }
 .shopping-nav a { flex: 1 0 auto; padding: 9px 13px; border-radius: 10px; background: white; text-align: center; text-decoration: none; font-size: .8rem; font-weight: 850; }
@@ -385,6 +400,8 @@ footer a { font-size: .8rem; }
   .now-card a { width: 100%; text-align: center; }
   .tools-grid { grid-template-columns: 1fr; }
   .shopping-grid { grid-template-columns: 1fr; }
+  .airport-zone-grid, .airport-food-groups { grid-template-columns: 1fr; }
+  #shop-airport, #food-airport { grid-column: auto; }
   .onsite-shopping { margin-inline: -4px; padding: 18px 14px; }
   .onsite-shopping__heading { align-items: flex-start; flex-direction: column; gap: 4px; }
   .onsite-shopping-grid { display: flex; gap: 10px; margin-inline: -14px; padding: 0 14px 6px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }

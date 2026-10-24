@@ -1,5 +1,5 @@
-const CACHE_NAME = 'nagoya-family-trip-v18';
-const APP_SHELL = ['./', './index.html', './styles.css?v=18', './app.js?v=18', './manifest.webmanifest', './icon.svg', './assets/shopping/donguri.jpg', './assets/shopping/pokemon-center.webp', './assets/shopping/noritake-garden.jpg', './assets/shopping/aquarium-shop.jpg', './assets/shopping/legoland-minifigure.webp', './assets/shopping/railway-stickers.jpg'];
+const CACHE_NAME = 'nagoya-family-trip-v19';
+const APP_SHELL = ['./', './index.html', './styles.css?v=19', './app.js?v=19', './manifest.webmanifest', './icon.svg', './assets/shopping/donguri.jpg', './assets/shopping/pokemon-center.webp', './assets/shopping/noritake-garden.jpg', './assets/shopping/aquarium-shop.jpg', './assets/shopping/legoland-minifigure.webp', './assets/shopping/railway-stickers.jpg'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
