@@ -8,7 +8,7 @@
   <title>우리 가족 나고야 여행</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
   <a class="skip-link" href="#main">일정으로 바로가기</a>
@@ -273,11 +273,12 @@
           <p class="shopping-card__lead">멀리 이동하지 않고 선물과 필요한 물건을 한 번에 보기 좋은 안전한 선택.</p>
           <ul class="shopping-list">
             <li><strong>JR 나고야 다카시마야 B1·B2</strong><span>나고야 과자, 도시락, 식품 선물</span></li>
-            <li><strong>Gate Tower Mall</strong><span>패션·생활잡화, 호텔 복귀가 쉬움</span></li>
-            <li><strong>Hands·Bic Camera</strong><span>문구·여행용품·전자제품이 필요할 때</span></li>
+            <li><strong>도토리공화국 · Gate Tower Mall 1F</strong><span>토토로·지지 굿즈와 대형 네코버스 포토존 · 10:00~20:00</span></li>
+            <li><strong>Bic Camera · JR Gate Tower 9~10F</strong><span>토미카·실바니안·호빵맨 완구와 게임</span></li>
+            <li><strong>GU·Hands</strong><span>옷, 문구, 여행용품이 필요할 때</span></li>
           </ul>
           <div class="shop-tags"><span>우이로</span><span>새우 센베이</span><span>오구라토스트 과자</span><span>문구</span></div>
-          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/search/?api=1&query=JR+Nagoya+Takashimaya" target="_blank" rel="noopener">📍 지도 보기</a><a class="route-btn" href="https://www.jr-takashimaya.co.jp/en/" target="_blank" rel="noopener">공식 층별 안내</a></div>
+          <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/search/?api=1&query=JR+Nagoya+Takashimaya" target="_blank" rel="noopener">📍 지도 보기</a><a class="route-btn" href="https://www.jr-tgm.com/shops/detail/235" target="_blank" rel="noopener">지브리 매장</a><a class="route-btn" href="https://www.biccamera.com/bc/i/shop/shoplist/shop120.jsp" target="_blank" rel="noopener">빅카메라 매장</a></div>
         </article>
 
         <article class="shopping-card shopping-card--accent" id="shop-sakae">
@@ -316,6 +317,38 @@
           <div class="event__actions"><a class="route-btn route-btn--primary" href="https://www.google.com/maps/search/?api=1&query=Centrair+Souvenir+Shop+Terminal+1" target="_blank" rel="noopener">📍 매장 위치</a><a class="route-btn" href="https://www.centrair.jp/shop-dine/shop/" target="_blank" rel="noopener">공식 매장 검색</a></div>
         </article>
       </div>
+
+      <section class="shopping-picks" aria-labelledby="shopping-picks-title">
+        <header class="shopping-picks__header"><div><p>FROM THE REFERENCE</p><h3 id="shopping-picks-title">우리 가족 쇼핑 후보</h3><span>가격·재고는 넣지 않고, 이미지에서 눈여겨볼 품목만 정리했어요.</span></div><strong id="shop-progress">0 / 16</strong></header>
+        <div class="progress-track" aria-hidden="true"><span id="shop-progress-bar"></span></div>
+        <div class="shopping-pick-groups">
+          <fieldset><legend>🌳 지브리 굿즈 · 1F</legend>
+            <label><input type="checkbox" data-shop-check="ghibli-plush"><span><b>토토로·지지 인형</b><small>크기와 부피 먼저 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="ghibli-handkerchief"><span><b>캐릭터 손수건</b><small>가볍고 선물하기 쉬움</small></span></label>
+            <label><input type="checkbox" data-shop-check="ghibli-socks"><span><b>마녀배달부 키키 양말</b><small>사이즈 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="ghibli-keyring"><span><b>키링·작은 소품</b><small>아이별로 하나씩 고르기 좋음</small></span></label>
+            <label><input type="checkbox" data-shop-check="ghibli-tableware"><span><b>머그·접시</b><small>파손 방지 포장 요청</small></span></label>
+          </fieldset>
+          <fieldset><legend>🚗 완구 · 9~10F</legend>
+            <label><input type="checkbox" data-shop-check="toy-tomica"><span><b>토미카</b><small>번호를 정한 뒤 재고 카드·직원 문의</small></span></label>
+            <label><input type="checkbox" data-shop-check="toy-sylvanian"><span><b>실바니안 패밀리</b><small>낱개 인형은 작은 선물 후보</small></span></label>
+            <label><input type="checkbox" data-shop-check="toy-anpanman"><span><b>호빵맨 완구</b><small>부피와 건전지 규격 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="toy-game"><span><b>게임·Switch 소프트</b><small>한국어 지원과 지역 호환 확인</small></span></label>
+          </fieldset>
+          <fieldset><legend>🍘 나고야 먹거리</legend>
+            <label><input type="checkbox" data-shop-check="food-tebasaki"><span><b>테바사키맛 과자</b><small>나고야다운 가벼운 선물</small></span></label>
+            <label><input type="checkbox" data-shop-check="food-miso"><span><b>미소 과자·된장 소스</b><small>누수되지 않게 포장</small></span></label>
+            <label><input type="checkbox" data-shop-check="food-curry"><span><b>카레·조미 소스</b><small>액체류·육류 성분 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="food-sweets"><span><b>우이로·새우 센베이</b><small>유통기한과 부피 확인</small></span></label>
+          </fieldset>
+          <fieldset><legend>🧺 실용 쇼핑</legend>
+            <label><input type="checkbox" data-shop-check="daily-medicine"><span><b>소화제·파스류</b><small>성분, 연령, 국내 반입 조건 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="daily-clothes"><span><b>GU 옷</b><small>사이즈표와 면세 가능 여부 확인</small></span></label>
+            <label><input type="checkbox" data-shop-check="daily-wrap"><span><b>선물 포장</b><small>도토리공화국 유료 포장 현장 확인</small></span></label>
+          </fieldset>
+        </div>
+        <div class="shopping-picks__footer"><p><b>사진도 남기기</b> 도토리공화국의 대형 토토로·네코버스 포토존은 구매하지 않아도 아이들과 보기 좋은 코스.</p><button class="text-button" id="reset-shop-list" type="button">쇼핑 체크 초기화</button></div>
+      </section>
 
       <aside class="taxfree-card" id="shop-taxfree">
         <div><p>🧾 TAX FREE MEMO</p><h3>면세는 여권 원본과 당일 영수증</h3></div>
@@ -498,6 +531,6 @@
   </nav>
 
   <div class="offline-toast" id="offline-toast" role="status" aria-live="polite">오프라인 상태입니다. 저장된 일정은 계속 볼 수 있어요.</div>
-  <script src="app.js?v=8" defer></script>
+  <script src="app.js?v=9" defer></script>
 </body>
 </html>

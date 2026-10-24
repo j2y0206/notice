@@ -213,6 +213,32 @@ const writeLocalValue = (key, value) => {
   try { localStorage.setItem(key, value); return true; } catch { return false; }
 };
 
+const shoppingInputs = [...document.querySelectorAll('[data-shop-check]')];
+const shopProgress = document.querySelector('#shop-progress');
+const shopProgressBar = document.querySelector('#shop-progress-bar');
+const resetShopList = document.querySelector('#reset-shop-list');
+const savedShopping = (() => {
+  try { return JSON.parse(readLocalValue('nagoya-shopping-list-v1', '{}')); } catch { return {}; }
+})();
+
+const updateShoppingList = () => {
+  const state = Object.fromEntries(shoppingInputs.map((input) => [input.dataset.shopCheck, input.checked]));
+  writeLocalValue('nagoya-shopping-list-v1', JSON.stringify(state));
+  const completed = shoppingInputs.filter((input) => input.checked).length;
+  if (shopProgress) shopProgress.textContent = `${completed} / ${shoppingInputs.length}`;
+  if (shopProgressBar) shopProgressBar.style.width = `${shoppingInputs.length ? (completed / shoppingInputs.length) * 100 : 0}%`;
+};
+
+shoppingInputs.forEach((input) => {
+  input.checked = Boolean(savedShopping[input.dataset.shopCheck]);
+  input.addEventListener('change', updateShoppingList);
+});
+resetShopList?.addEventListener('click', () => {
+  shoppingInputs.forEach((input) => { input.checked = false; });
+  updateShoppingList();
+});
+updateShoppingList();
+
 const checklistInputs = [...document.querySelectorAll('[data-check]')];
 const checkProgress = document.querySelector('#check-progress');
 const checkProgressBar = document.querySelector('#check-progress-bar');
