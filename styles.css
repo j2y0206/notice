@@ -275,6 +275,10 @@ details p { margin: 10px 0 0; }
 .install-help { margin-top: 13px; padding: 12px; border-radius: 12px; background: #f2f5f8; }
 .install-help p { margin: 0; color: var(--muted); font-size: .76rem; }
 .install-help p + p { margin-top: 9px; }
+.shared-map-tool { background: linear-gradient(135deg, #f2f8f3, #edf5fb); }
+.shared-map-tool__body { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.shared-map-tool__body p { max-width: 720px; margin: 0; color: var(--muted); font-size: .8rem; }
+.shared-map-tool__body .tool-action { flex: 0 0 auto; width: auto; min-width: 190px; padding-inline: 16px; text-align: center; text-decoration: none; }
 .emergency-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .emergency-call { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 15px; border: 1px solid #dbe1e8; border-radius: 15px; text-decoration: none; }
 .emergency-call span { font-size: .76rem; font-weight: 850; }
@@ -385,6 +389,8 @@ footer a { font-size: .8rem; }
   .taxfree-card { grid-template-columns: 1fr; }
   .taxfree-card > a { grid-column: auto; }
   .tool-card--wide { grid-column: auto; }
+  .shared-map-tool__body { align-items: stretch; flex-direction: column; }
+  .shared-map-tool__body .tool-action { width: 100%; }
   .checklist-groups { grid-template-columns: 1fr; gap: 14px; }
   .emergency-grid { grid-template-columns: 1fr; }
   .hotel-card { align-items: flex-start; flex-direction: column; }
