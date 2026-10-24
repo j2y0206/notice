@@ -7,7 +7,8 @@ const speechStatus = document.querySelector('#speech-status');
 const phraseSearch = document.querySelector('#phrase-search');
 const phraseSearchStatus = document.querySelector('#phrase-search-status');
 const phrasebook = document.querySelector('#phrasebook');
-const navSections = [...tripDays, phrasebook].filter(Boolean);
+const shoppingGuide = document.querySelector('#shopping');
+const navSections = [...tripDays, shoppingGuide, phrasebook].filter(Boolean);
 const nowBadge = document.querySelector('#now-badge');
 const nowTitle = document.querySelector('#now-title');
 const nowMeta = document.querySelector('#now-meta');
@@ -139,7 +140,7 @@ dockLinks.forEach((link) => {
   });
 });
 
-const dockTargets = ['top', 'overview', ...tripDays.map((day) => day.id), 'tools', 'quick', 'phrasebook', 'emergency-card']
+const dockTargets = ['top', 'overview', ...tripDays.map((day) => day.id), 'shopping', 'tools', 'quick', 'phrasebook', 'emergency-card']
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 const dockObserver = new IntersectionObserver((entries) => {
